@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+
+\usepackage[paper=letterpaper,
+           marginparwidth=1in,
+           hmargin={1.1in,0in},
+           vmargin={1in,1.5in},           
+           includemp
+           ]{geometry}
+           
+ \usepackage{longtable}
+ \usepackage{graphicx}
+ \usepackage{caption}
+\usepackage{subcaption}
+\usepackage[]{natbib}
+\usepackage{latexsym,amsfonts,amssymb,amsmath,amsthm,mathrsfs}
+\usepackage{bbm}
+\usepackage{amsthm}
+\newtheorem{definition}{Definition}
+\usepackage{hyperref}
+\usepackage{lscape}
+
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=black,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=blue           % color of external links
+}
+
+\title{Dynamic matching procedures for causal inference in social networks}
+
+\providecommand{\keywords}[1]{\textbf{\textit{Keywords ---}} #1}
+
+
+\author{{\textsc{Imanol Arrieta Ibarra}} \\
+%EndAName
+ \and {\textsc{Thomas Palomares}} \\
+%EndAName
+}
+
+
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+...
+\end{abstract}
+
+\newpage
+
+\section{Introduction}
+
+\section{Network Creation Model}
+
+Similar to ..., we developed a network creation model which is ran in two stages. In a first stage, we allow each node to nominate a friend. In the second stage we compute the happiness of all the nodes.
+
+For each node we create a set of candidates based in probability: $\text{logit}^{-1} \left(-3||(X_i,Z_i)-(X_j,Z_j)||\right)$. Then from the set of candidates, we pick one at random to be the nominated friend. After the edges have been added, we compute the happiness according to the following equation:
+
+$$h_{i,t} = w_0 +w_1 h_{i,t-1} + w_2\sum\limits h_{j,t} + w_3\sum\limits h_{j,t-1} + w_4 X_{i,t} + w_5 Z_{i,t}$$
+
+
+\bibliographystyle{chicago}
+\bibliography{biblio}
+
+\end{document}
