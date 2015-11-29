@@ -5,12 +5,12 @@ The style file: chicago.bst
 Database file #1: biblio.bib
 You've used 1 entry,
             2861 wiz_defined-function locations,
-            620 strings with 5071 characters,
-and the built_in function-call counts, 759 in all, are:
+            620 strings with 5040 characters,
+and the built_in function-call counts, 763 in all, are:
 = -- 68
 > -- 52
 < -- 0
-+ -- 16
++ -- 18
 - -- 20
 * -- 67
 := -- 139
@@ -34,7 +34,7 @@ purify$ -- 13
 quote$ -- 0
 skip$ -- 23
 stack$ -- 0
-substring$ -- 45
+substring$ -- 47
 swap$ -- 6
 text.length$ -- 0
 text.prefix$ -- 0
