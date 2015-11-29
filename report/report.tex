@@ -59,22 +59,25 @@
 
 
 \begin{abstract}
-We design a matching mechanism to elicit the eect of friendship formation on a group of observed traits.
+We design a matching mechanism to elicit the elect of friendship formation on a group of observed traits.
 \end{abstract}
 
 \newpage
 
 \section{Introduction}
 
-
+A social network is a community of people with common interests. Such networks are not static but evolve over time, suh as friendships being created and dissolved over the life course. 
 
 \section{Network Creation Model}
 
-Similar to ..., we developed a network creation model which is ran in two stages. In a first stage, we allow each node to nominate a friend. In the second stage we compute the happiness of all the nodes.
+Similar to \cite{christakis2007spread}, we developed a network creation model which is ran in two stages. In a first stage, we allow each node to nominate a friend. In the second stage we compute the happiness of all the nodes.
 
 For each node we create a set of candidates based in probability: $\text{logit}^{-1} \left(-3||(X_i,Z_i)-(X_j,Z_j)||\right)$. Then from the set of candidates, we pick one at random to be the nominated friend. After the edges have been added, we compute the happiness according to the following equation:
+$$h_{i,t} = w_0 +w_1 h_{i,t-1} + w_2\sum\limits h_{j,t-1} + w_3 X_{i} + w_4 Z_{i}$$
 
-$$h_{i,t} = w_0 +w_1 h_{i,t-1} + w_2\sum\limits h_{j,t} + w_3\sum\limits h_{j,t-1} + w_4 X_{i,t} + w_5 Z_{i,t}$$
+\subsection{Limitations}
+
+The assumption that the current happiness depends only of the previous happiness of the person and of their friends is a clear limitation of the model. It is also a very useful assumption allowing us to easiily compute the happiness without computing an expensive fixed point equilibrium at each step.
 
 
 \bibliographystyle{chicago}
