@@ -72,14 +72,23 @@ A social network is a community of people with common interests. Such networks a
 
 \section{Network Creation Model}
 
+\subsection{Simulated model}
+
 Similar to \cite{christakis2007spread}, we developed a network creation model which is ran in two stages. In a first stage, we allow each node to nominate a friend. In the second stage we compute the happiness of all the nodes.
 
 For each node we create a set of candidates based in probability: $\text{logit}^{-1} \left(-3||(X_i,Z_i)-(X_j,Z_j)||\right)$. Then from the set of candidates, we pick one at random to be the nominated friend. After the edges have been added, we compute the happiness according to the following equation:
 $$h_{i,t} = w_0 +w_1 h_{i,t-1} + w_2\sum\limits h_{j,t-1} + w_3 X_{i} + w_4 Z_{i}$$
+When the happiness is updated for every node in the network, we re update the set of friends candidate for each node.
+
+The different steps run as follow: first, for the initialization, we add one friend to each node of the network. Then, each step would consist of adding a friend only for a randomly selected subset of the nodes (generally for 30\% of the nodes). 
+
+\subsection{Matching approach}
+
+
 
 \subsection{Limitations}
 
-The assumption that the current happiness depends only of the previous happiness of the person and of their friends is a clear limitation of the model. It is also a very useful assumption allowing us to easiily compute the happiness without computing an expensive fixed point equilibrium at each step.
+The assumption that the current happiness depends only of the previous happiness of the person and of their friends is a clear limitation of the model. It is also a very useful assumption allowing us to easiily compute the happiness without computing an expensive fixed point equilibrium at each step. 
 
 
 \bibliographystyle{chicago}
