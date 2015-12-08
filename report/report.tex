@@ -73,8 +73,6 @@ We design a matching mechanism for evolving networks. We simulate a graph model 
 
 \section{Motivation and Background}
 
-
-
 Is obesity contagious? Can happiness spread through social networks? Is loneliness viral? Does befriending happy people makes us happier or do we tend to be friends of people with similar happiness as ours?. These questions have generated big controversy after \cite{christakis2007spread} affirmed that this phenomena diffuse thorough social networks similar to how a disease would.They deal on  the inquest of differentiating between homophily and influence based contagion abundant in causal inference literature. Fowler and Christakis intended to address this when investigating the effect of having obese friends to one’s obesity in \citep{christakis2007spread} and then on one’s happiness on. Also, \citep{cacioppo2009alone} studied how “lonely people tend to receive fewer friendship nominations, but they also tend to name fewer people as friends”. However \citep{shalizi2011homophily} argued that the results from all these studies were inconclusive due to possible confounders when working with observational studies. Furthermore, \citep{cohen2008detecting} later detected implausible social network effects in acne, height, and headaches using the same methodology and dataset as Fowler and Christakis . \\
 
 Although distinguishing between homophily and influence based contagion in a static network was proven to be impossible, \cite{aral2009distinguishing} argued that by using propensity score matching on an evolving network, they were able to get the true influence effect ( or at least a bound to homophily). They did so by computing the propensity of a friend on adopting a new platform called Yahoo Go.\\
@@ -85,9 +83,10 @@ The goal of our project is to build a matching procedure on evolving networks th
 
 We also computed the true effect by running simulations and computing the average treatment effect on the treated. Unfortunately not one of the matching procedures we tried provided us with an unbiased estimate with low variance. PSM’s variance made it un-meaningful, while GPS and GEP had high bias.\\
 
-In section \ref{Network Creation Model}, we present the graph creation algorithm and how happiness was computed. Section defines the effect we are trying to elicit. Section \ref{Matching Mechanisms} describes the matching mechanisms we tried. Section \ref{Treatment Effect} show the results, possible explanations of why we were not able to identify the treatment effects and conclusions.\\
+In section \ref{Network Creation Model}, we present the graph creation algorithm and how happiness was computed. Section \ref{Treatment Effect} defines the effect we are trying to elicit. Section \ref{Matching Mechanisms} describes the matching mechanisms we tried. Section \ref{Results} show the results, possible explanations of why we were not able to identify the treatment effects and conclusions.\\
 
-\section{Network Creation Model} \label{Network Creation Model}
+\section{Network Creation Model}
+\label{Network Creation Model}
 
 \subsection{Simulated model}
 
@@ -127,14 +126,16 @@ When the happiness is updated for every node in the network, we re update the se
 In real life it is hard to believe that our happiness depends on our friends’ happiness on previous years. However we needed to make this assumption in order to keep the model as simple as possible. Otherwise we would have to compute a fixed point at every timestep ( assuming that such a fixed point exists). 
 
 
-\section{Treatment Effect} \label{Treatment Effect}
+\section{Treatment Effect}
+\label{Treatment Effect}
 Under perfect circumstances we would be interested in eliciting the effect of an alter’s happiness ( weight, loneliness, etc…) on the happiness of the ego. However, by limiting ourselves to matching mechanisms on edge formation, this effect is unidentifiable. The reason is because edge formation only provides information about the channel through which influence can flow. It says nothing about what kind of response this influence provoques. Since there are cases when an alter is happier than the ego and other cases when she is sadder, this effects would cancel out. The only case when we would be able to identify an effect would be when only one of the two directions has an effect on the ego. This is, imagine that the ego’s happiness is only influenced by happier friends, then we would be able to identify the effect. 
 
 Now, we could compute the absolute effect which would provide us with a measurement of how influential friends are in certain behaviors. However we would lose the direction of the effect in this case. We would not know if only happy friends drive you happier or if only sad friends make you sadder. When taking policy decisions this is a crucial distinction. 
 
 For the reasons presented in the previous paragraphs, we decided to define the treatment as the formation of an edge with an alter who is happier than the ego. This would allow us to identify both the magnitude and the direction of the effect, limiting ourselves to only one side of the effect. We could also compute the same for sadder alters but this is not necessary if irrelevant for policy decisions. 
 
-\section{Matching Mechanisms} \label{Matching Mechanisms}
+\section{Matching mechanisms}
+\label{Matching Mechanisms}
 We tried three different matching mechanisms in order to recover the desired treatment effect: propensity score matching, greedy matching with caliper based on the propensity score and matching based on the similarity between the endpoints of two edges. Propensity score matching gave us a huge estimate which in terms of any real application would have been meaningless. Greedy matching provided a more stable, however biased, estimate. Finally, matching based on the endpoints returned a much more stable estimate of the treatment effect, but still a biased one. 
 
 \subsection{Propensity Score Matching (PSM)}
@@ -158,7 +159,8 @@ There are several problems when matching with propensity scores. In general thes
 One way to solve this problem is to match the edges based on the endpoints. This makes comparisons between edges more robust but still presents difficulties regarding our choice of happiness depending on friends' lagged happiness. Unfortunately the only way to solve for this issue is to match on the whole ego network and this would be prohibitive in any real graph.
 
 
-\subsection{Results and Limitations}
+\section{Results and Limitations}
+\label{Results}
 
 The assumption that the current happiness depends only of the previous happiness of the person and of their friends is a clear limitation of the model. It is also a very useful assumption allowing us to easily compute the happiness without computing an expensive fixed point equilibrium at each step. It would be interesting as future work to correctly model this part of the model. Maybe by doing so many of the counter-intuitive results may be solved.
 
@@ -200,7 +202,7 @@ We first wanted to observe if out process would identify small effects or no eff
   \label{fig:sub2}
 \end{subfigure}
 \caption{Coefficient estimation when there is no effect for GPS.}
-\label{fig:no_effect_gps}
+\label{fig:no_effect_gep}
 \end{figure}
 
 Then, we  wanted to observe if out process would identify small effects or almost zero effects. For an effect of 0.002 GPS was able to produce an unbiased estimate but the variance would not have allow us to reject the null hypothesis. GEP returns a biased estimator with low variance. Figures \ref{fig:small_effect_gps} and \ref{fig:small_effect_gep} show this case. 
@@ -220,7 +222,7 @@ Then, we  wanted to observe if out process would identify small effects or almos
   \label{fig:sub2}
 \end{subfigure}
 \caption{Coefficient estimation when there is no effect for GEP.}
-\label{fig:small_effect_gep}
+\label{fig:small_effect_gps}
 \end{figure}
 
 \begin{figure}[h]
