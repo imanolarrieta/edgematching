@@ -154,7 +154,14 @@ For this method, we used the propensity scores computed when doing PSM and perfo
 
 \subsection{Greedy Matching on the edge's endpoints (GEP)}
 
-There are several problems when matching with propensity scores. In general these are summarized quite well in …(Gary King). For our particular application, we encountered that matching on propensity could provide wrong estimates by the nature of the method. Figure … evidenciates one of these issues. On it , the left clique is matched to the right one. However, although an edge was formed on the left clique and none was formed on the right one, the estimate would be negative. This does not mean that the effect of adding a happier friend is negative. In part this has to do with our choice of computing an ego’s happiness based on the lagged happiness of her friends.\\
+There are several problems when matching with propensity scores. In general these are summarized quite well in \cite{king2007politically}. For our particular application, we encountered that matching on propensity could provide wrong estimates by the nature of the method. Figure \ref{fig:treatment} makes one of these issues evident. On it , the left clique is matched to the right one. However, although an edge was formed on the left clique and none was formed on the right one, the estimate would be negative. This does not mean that the effect of adding a happier friend is negative. In part this has to do with our choice of computing an ego’s happiness based on the lagged happiness of her friends.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.3]{graph}
+\caption{Example of possible confounder.}
+\label{fig:treatment}
+\end{figure}
 
 One way to solve this problem is to match the edges based on the endpoints. This makes comparisons between edges more robust but still presents difficulties regarding our choice of happiness depending on friends' lagged happiness. Unfortunately the only way to solve for this issue is to match on the whole ego network and this would be prohibitive in any real graph.
 
@@ -162,7 +169,7 @@ One way to solve this problem is to match the edges based on the endpoints. This
 \section{Results and Limitations}
 \label{Results}
 
-The assumption that the current happiness depends only of the previous happiness of the person and of their friends is a clear limitation of the model. It is also a very useful assumption allowing us to easily compute the happiness without computing an expensive fixed point equilibrium at each step. It would be interesting as future work to correctly model this part of the model. Maybe by doing so many of the counter-intuitive results may be solved.
+
 
 As explained above, none of the matching procedures provided us with a useful estimate. We will proceed by showing the results for the greedy matching mechanisms since the variance of the propensity score matching procedure only gave us gibberish.
 
@@ -204,8 +211,8 @@ We first wanted to observe if out process would identify small effects or no eff
 \caption{Coefficient estimation when there is no effect for GPS.}
 \label{fig:no_effect_gep}
 \end{figure}
-
-Then, we  wanted to observe if out process would identify small effects or almost zero effects. For an effect of 0.002 GPS was able to produce an unbiased estimate but the variance would not have allow us to reject the null hypothesis. GEP returns a biased estimator with low variance. Figures \ref{fig:small_effect_gps} and \ref{fig:small_effect_gep} show this case. 
+\FloatBarrier
+Then, we  wanted to observe if our procedure would identify small effects or almost zero effects. For an effect of 0.002, GPS was able to produce an unbiased estimate but the variance would not have allowed us to reject the null hypothesis. On the other hand, GEP returns a biased estimator with low variance. Figures \ref{fig:small_effect_gps} and \ref{fig:small_effect_gep} show this case. \\
 
 \begin{figure}[h]
 \centering
@@ -245,7 +252,7 @@ Then, we  wanted to observe if out process would identify small effects or almos
 
 \FloatBarrier
 
-Finally , we  tried to estimate a large effect. For an effect of 0.35 both GPS and GEP provided a result close to 0.25 which means that these estimators are biased.   Figures \ref{fig:large_effect_gps} and \ref{fig:large_effect_gep} show this case. 
+Finally , we  tried to estimate a large effect. For an effect of 0.35, both GPS and GEP provided an estimation close to 0.25 which means that these estimators are biased.   Figures \ref{fig:large_effect_gps} and \ref{fig:large_effect_gep} show this case. \\
 
 \begin{figure}[h]
 \centering
@@ -283,7 +290,12 @@ Finally , we  tried to estimate a large effect. For an effect of 0.35 both GPS a
 \label{fig:large_effect_gep}
 \end{figure}
 
+Regarding limitations, the assumption that an ego's current happiness depends only of the previous happiness of the person and of their friends is a clear limitation of the model. It is also a very useful assumption allowing us to easily compute the happiness without computing an expensive fixed point equilibrium at each step. It would be interesting as future work to correctly model this part of the model. Maybe by doing so many of the counter-intuitive results may be solved. \\
+
+Further, we were not able to tackle a proper way to decouple the presence of an edge and the effect the alter's behavior has on the ego. We think that the reason of why the matching mechanisms were biased is that there are other effects that add noise to the model. Specifically, the friends a node had made in previous rounds affect its happiness in future rounds, so if a node made a very happy friend, this may cloud effect of a new calm friend. This again may be resolved by working with fixed points.
 \FloatBarrier
+
+
 \section{Conclusions and future work}
 Throughout this project we found several issues regarding the estimation of causal effects on observational studies. We showed that even for very simplistic models, identifying an influence effect is very complicated. It is in particular difficult to isolate and measure the influence of one single effect (here befriending a happier friend) and distinguishing phenomena occurring simultaneously, such as the effect of the creation of an edge in itself or the influence of an happier friend on a node. This puts some doubts on Aral et all’s findings as well as on similar methods that haven’t been confirmed on simulated or known datasets. \\
 
