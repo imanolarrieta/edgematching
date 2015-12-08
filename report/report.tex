@@ -60,7 +60,7 @@
 
 
 \begin{abstract}
-We design a matching mechanism to for evolving networks. We simulate a graph model for which nodes form new edges over time. We compute for each node an output, happiness , depending notably on the happiness of a node's friends ( which could also be obesity, loneliness or any other behavior that may spread through a social network). We focus on extracting the treatment effect of a node making a friend who is happier than she is. We explain why this is the best we can do when matching based on edge formation. Furthermore, from the three matching mechanisms we tried, not one was able to recover the true treatment effect. This exposes some of the comebacks of using matching procedures in observational studies. 
+We design a matching mechanism for evolving networks. We simulate a graph model for which nodes form new edges over time. We compute for each node an output, happiness , depending notably on the happiness of a node's friends ( which could also be obesity, loneliness or any other behavior that may spread through a social network). We focus on extracting the treatment effect of a node making a friend who is happier than she is. We explain why this is the best we can do when matching based on edge formation. Furthermore, from the three matching mechanisms we tried, not one was able to recover the true treatment effect. This exposes some of the comebacks of using matching procedures in observational studies. 
 
 \end{abstract}
 
@@ -73,7 +73,7 @@ We design a matching mechanism to for evolving networks. We simulate a graph mod
 
 \section{Motivation and Background}
 
-Is obesity contagious? Can happiness spread through social networks? Is loneliness viral? Does befriending happy people makes us happier or do we tend to be friends of people with similar happiness as ours?. These questions have generated big controversy after \cite{christakis2007spread} affirmed that this phenomena diffuse thorough social networks similar to how a disease would.They deal on  the inquest of differentiating between homophily and influence based contagion abundant in causal inference literature. Fowler and Christakis intended to address this when investigating the effect of having obese friends to one’s obesity in .... and then on one’s happiness on. Also,  Cacioppo, Fowler and Christakis[5] studied how “lonely people tend to receive fewer friendship nominations, but they also tend to name fewer people as friends”. However … argued that the results from all these studies were inconclusive due to possible confounders when working with observational studies. Furthermore, Cohen-Cole and Fetcher[4] later detected implausible social network effects in acne, height, and headaches using the same methodology and dataset as Fowler and Christakis . \\
+Is obesity contagious? Can happiness spread through social networks? Is loneliness viral? Does befriending happy people makes us happier or do we tend to be friends of people with similar happiness as ours?. These questions have generated big controversy after \cite{christakis2007spread} affirmed that this phenomena diffuse thorough social networks similar to how a disease would.They deal on  the inquest of differentiating between homophily and influence based contagion abundant in causal inference literature. Fowler and Christakis intended to address this when investigating the effect of having obese friends to one’s obesity in \cite{christakis2007spread} and then on one’s happiness on. Also,  Cacioppo, Fowler and Christakis[5] studied how “lonely people tend to receive fewer friendship nominations, but they also tend to name fewer people as friends”. However … argued that the results from all these studies were inconclusive due to possible confounders when working with observational studies. Furthermore, Cohen-Cole and Fetcher[4] later detected implausible social network effects in acne, height, and headaches using the same methodology and dataset as Fowler and Christakis . \\
 
 Although distinguishing between homophily and influence based contagion in a static network was proven to be impossible, Aral and al[3] argued that by using propensity score matching on an evolving network, they were able to get the true influence effect ( or at least a bound to homophily). They did so by computing the propensity of a friend on adopting a new platform called Yahoo Go.\\
 
@@ -201,7 +201,7 @@ We first wanted to observe if out process would identify small effects or no eff
 \label{fig:no_effect_gps}
 \end{figure}
 
-Then, we  wanted to observe if out process would identify small effects or almost zero effects. For an effect of 0.002 GPS was able to produce an unbiased estimate but the variance would not have allow us to reject the null hypothesis. GEP  Figures \ref{fig:small_effect_gps} and \ref{fig:small_effect_gep} show this case. 
+Then, we  wanted to observe if out process would identify small effects or almost zero effects. For an effect of 0.002 GPS was able to produce an unbiased estimate but the variance would not have allow us to reject the null hypothesis. GEP returns a biased estimator with low variance. Figures \ref{fig:small_effect_gps} and \ref{fig:small_effect_gep} show this case. 
 
 \begin{figure}[h]
 \centering
@@ -231,45 +231,7 @@ Then, we  wanted to observe if out process would identify small effects or almos
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=.9\linewidth]{estimated_no_influence_gep.png}
-  \caption{Estimated effect}
-  \label{fig:sub2}
-\end{subfigure}
-\caption{Coefficient estimation when there is an effect of 0.002 for GEP.}
-\label{fig:small_effect_gep}
-\end{figure}
-
-Finally , we  tried to estimate a large effect. For an effect of 0.35 both GPS and GEP provided a result close to 0.25 which means that these estimators are biased.   Figures \ref{fig:large_effect_gps} and \ref{fig:large_effect_gep} show this case. 
-
-\begin{figure}[h]
-\centering
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.9\linewidth]{treatment_effect_no_influence.png}
-  \caption{True treatment effect computed by simulations}
-  \label{fig:sub1}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.9\linewidth]{estimated_no_influence.png}
-  \caption{Estimated effect}
-  \label{fig:sub2}
-\end{subfigure}
-\caption{Coefficient estimation when there is no effect for GEP.}
-\label{fig:small_effect_gep}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.9\linewidth]{treatment_effect_no_influence.png}
-  \caption{True treatment effect computed by simulations}
-  \label{fig:sub1}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.9\linewidth]{estimated_no_influence_gep.png}
+  \includegraphics[width=.9\linewidth]{estimated_small_effect_gep.png}
   \caption{Estimated effect}
   \label{fig:sub2}
 \end{subfigure}
@@ -278,12 +240,52 @@ Finally , we  tried to estimate a large effect. For an effect of 0.35 both GPS a
 \end{figure}
 
 \FloatBarrier
+
+Finally , we  tried to estimate a large effect. For an effect of 0.35 both GPS and GEP provided a result close to 0.25 which means that these estimators are biased.   Figures \ref{fig:large_effect_gps} and \ref{fig:large_effect_gep} show this case. 
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{treatment_effect.png}
+  \caption{True treatment effect computed by simulations}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{estimated_treatment_effect.png}
+  \caption{Estimated effect}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{Coefficient estimation when there is no effect for GEP.}
+\label{fig:large_effect_gps}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{treatment_effect_no_influence.png}
+  \caption{True treatment effect computed by simulations}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{estimated_large_effect_gep.png}
+  \caption{Estimated effect}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{Coefficient estimation when there is an effect of 0.002 for GEP.}
+\label{fig:large_effect_gep}
+\end{figure}
+
+\FloatBarrier
 \subsection{Conclusions and future work}
 Throughout this project we found several issues regarding the estimation of causal effects on observational studies. We showed that even for very simplistic models, identifying an influence effect is very complicated. It is in particular difficult to isolate and measure the influence of one single effect (here befriending a happier friend) and distinguishing phenomena occurring simultaneously, such as the effect of the creation of an edge in itself or the influence of an happier friend on a node. This puts some doubts on Aral et all’s findings as well as on similar methods that haven’t been confirmed on simulated or known datasets. \\
 
-For future work, it would be interesting to perform a deeper analysis on this model to understand what is causing the estimators to be biased. If this step is overcome, many relevant questions may be asked: how to generalize this matching method for any step of the model and not only from the step where each node has only one friend and some of them acquires a second friend. Moreover it would be exciting to add a tie breaking component and to study the influence of dropping a friend.
+For future work, it would be interesting to perform a deeper analysis on this model to understand what is causing the estimators to be biased. If this is overcome, many relevant questions may be further analyzed: how to generalize this matching method for multiple time-steps?. Moreover, it would also be exciting to add a tie breaking component and to study the influence of dropping a friend.
 
-Finally, testing Aral et all’s algorithm on a simulated model and observing if known influence can be revealed by their method would be an interesting lead to understand better which phenomena are at stake in this model.
+Finally, testing \citep{aral2009distinguishing} algorithm on a simulated model and observing if known influence can be revealed by their method would be an interesting lead to understand better which phenomena are at stake in this model.
 	
 
 \newpage
